@@ -34,11 +34,10 @@ steps:
 - publish: $(build.artifactstagingdirectory)
   artifact: webApp
 
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   inputs:
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Azure for Students(d079df7a-b388-4566-9f67-a8c6ec90fd91)'
     appType: 'webApp'
-    resourceGroupName: 'epix-backend_group'
-    appName: 'epix-backend'
-    package: '$(build.artifactstagingdirectory)/**/*.zip'
-    deploymentMethod: 'auto'
+    WebAppName: 'epix-backend'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
