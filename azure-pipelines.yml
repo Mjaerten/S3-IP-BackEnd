@@ -31,7 +31,7 @@ steps:
     PathtoPublish: '$(build.artifactstagingdirectory)'
 
  
-- publish: $(build.artifactstagingdirectory)
+- publish: $(System.DefaultWorkingDirectory)
   artifact: webApp
 
 - task: AzureRmWebAppDeployment@4
