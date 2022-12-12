@@ -40,5 +40,5 @@ steps:
     appType: 'webApp'
     resourceGroupName: 'epix-backend_group'
     appName: 'epix-backend'
-    package: '$(build.DefaultWorkingDirectory)/**/*.zip'
+    package: '$(build.artifactstagingdirectory)/**/*.zip'
     deploymentMethod: 'auto'
