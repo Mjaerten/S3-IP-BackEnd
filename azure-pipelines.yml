@@ -28,7 +28,7 @@ steps:
   inputs:
     azureSubscription: 'Azure for Students(d079df7a-b388-4566-9f67-a8c6ec90fd91)'
     appType: 'webApp'
-    appName: 'ASP-Epix-a480'
+    appName: 'Epix'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
   
