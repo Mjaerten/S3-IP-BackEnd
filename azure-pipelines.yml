@@ -23,7 +23,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    targetFolder: '$(Build.ArtifactStagingDirectory)'    
+    targetFolder: '$(System.DefaultWorkingDirectory)'    
  
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
