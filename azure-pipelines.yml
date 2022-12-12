@@ -20,15 +20,9 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-
-- task: CopyFiles@2
-  inputs:
-    targetFolder: '$(System.DefaultWorkingDirectory)'    
  
 - task: PublishBuildArtifacts@1    
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+
 
 - task: AzureWebApp@1
   inputs:
