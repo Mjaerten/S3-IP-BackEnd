@@ -33,8 +33,8 @@ steps:
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Azure for Students(d079df7a-b388-4566-9f67-a8c6ec90fd91)'
-    appType: 'webAppLinux'
-    appName: 'Epix-S3'
+    appType: 'webApp'
+    appName: 'Epix'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    runtimeStack: 'JAVA|17-java17'
+    deploymentMethod: 'auto'
 
