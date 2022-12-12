@@ -20,6 +20,9 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+- task: PublishBuildArtifacts@1
+
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Azure for Students(d079df7a-b388-4566-9f67-a8c6ec90fd91)'
@@ -27,3 +30,4 @@ steps:
     appName: 'Epix-S3'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
     runtimeStack: 'JAVA|17-java17'
+
