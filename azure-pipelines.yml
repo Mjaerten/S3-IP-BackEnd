@@ -29,12 +29,14 @@ steps:
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)/**/*.zip'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
 
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   inputs:
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Azure for Students(d079df7a-b388-4566-9f67-a8c6ec90fd91)'
     appType: 'webApp'
-    appName: 'epix-backend'
-    package: '$(build.artifactstagingdirectory)/**/*.zip'
-    deploymentMethod: 'auto'
+    WebAppName: 'epix-backend'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    enableCustomDeployment: true
+    DeploymentType: 'webDeploy'
