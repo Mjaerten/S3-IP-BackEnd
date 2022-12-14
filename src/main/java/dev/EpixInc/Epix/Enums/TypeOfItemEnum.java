@@ -10,6 +10,7 @@ public enum TypeOfItemEnum {
         this.toString = toString;
     }
 
+    @Override
     public String toString(){
         return toString;
     }

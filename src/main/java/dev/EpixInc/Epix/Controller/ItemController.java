@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -30,13 +29,24 @@ public class ItemController {
     - post an item (movie and/or series) -> DONE
      */
 
-    @Autowired
+
     private ItemRepository itemRepository;
-    @Autowired
     private EpisodeRepository episodeRepository;
+    private GenreRepository genreRepository;
 
     @Autowired
-    private GenreRepository genreRepository;
+    public void setItemRepository(ItemRepository itemRepository){
+        this.itemRepository = itemRepository;
+    }
+    @Autowired
+    public void setEpisodeRepository(EpisodeRepository episodeRepository){
+        this.episodeRepository = episodeRepository;
+    }
+    @Autowired
+    public void setGenreRepository(GenreRepository genreRepository){
+        this.genreRepository = genreRepository;
+    }
+
 
     //gets all items
     @GetMapping("/get/items")
@@ -65,9 +75,8 @@ public class ItemController {
     List<Item> getItemsWithGenre(@PathVariable Long id)
     {
         List<Item> itemList = itemRepository.findAll();
-        List<Item> itemList1 = sortItemOfGenre(itemList, id);
 
-        return itemList1;
+        return sortItemOfGenre(itemList, id);
     }
 
     //gets all movies with same genre
@@ -75,9 +84,8 @@ public class ItemController {
     List<Item> getMoviesWithGenre(@PathVariable Long id)
     {
         List<Item> itemList = itemRepository.findByTypeOfItemEnum(TypeOfItemEnum.MOVIE);
-        List<Item> itemList1 = sortItemOfGenre(itemList, id);
 
-        return itemList1;
+        return sortItemOfGenre(itemList, id);
     }
 
     //gets all series with the same genre
@@ -85,15 +93,14 @@ public class ItemController {
     List<Item> getSeriesWithGenre(@PathVariable Long id)
     {
         List<Item> itemList = itemRepository.findByTypeOfItemEnum(TypeOfItemEnum.SERIES);
-        List<Item> itemList1 = sortItemOfGenre(itemList, id);
 
-        return itemList1;
+        return sortItemOfGenre(itemList, id);
     }
 
     //sorts items to return all items with the given genre
     List<Item> sortItemOfGenre(List<Item> itemList, Long GenreID)
     {
-        List<Item> itemList1 = new ArrayList<Item>();
+        List<Item> itemList1 = new ArrayList<>();
 
         Genre genre = genreRepository.findById(GenreID)
                 .orElseThrow(() -> new InvalidConfigurationPropertyValueException("id", GenreID, "Cannot find the genre"));
@@ -118,7 +125,6 @@ public class ItemController {
     Item postSeries(@RequestBody Item newItem)
     {
         List<Episodes> episodesList = new ArrayList<>();
-        List<Episodes> episodesList1 = new ArrayList<>();
         List<SeriesEpisode> seriesEpisodeList1 = new ArrayList<>();
         List<SeriesEpisode> seriesEpisodeList = (List<SeriesEpisode>) newItem.getListOfSeriesEpisode();
         for (SeriesEpisode se : seriesEpisodeList){

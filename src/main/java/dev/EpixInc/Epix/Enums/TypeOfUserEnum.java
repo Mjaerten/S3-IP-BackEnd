@@ -12,6 +12,7 @@ public enum TypeOfUserEnum {
         this.toString = toString;
     }
 
+    @Override
     public String toString(){
         return toString;
     }
