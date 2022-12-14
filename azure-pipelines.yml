@@ -18,7 +18,6 @@ steps:
     scannerMode: 'Other'
     extraProperties: 
       sonar.projectKey=Epix-S3_Epix
-      sonar.projectName=Epix
 
 - task: Maven@4
   inputs:
