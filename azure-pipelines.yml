@@ -19,9 +19,11 @@ steps:
     extraProperties: 
       sonar.projectKey=Epix-S3_Epix
       sonar.projectName=Epix
+
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
