@@ -10,6 +10,16 @@ pool:
   vmImage: windows-latest
 
 steps:
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'epix-s3'
+    scannerMode: 'Other'
+    extraProperties: 
+      sonar.projectKey=Epix-S3_Epix
+      sonar.projectName=Epix
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -21,14 +31,11 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: SonarCloudPrepare@1
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
   inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'epix-s3'
-    scannerMode: 'Other'
-    extraProperties: 
-      sonar.projectKey=Epix-S3_Epix
-      sonar.projectName=Epix
+    pollingTimeoutSec: '300'
 
 - task: CopyFiles@2
   inputs:
@@ -49,11 +56,7 @@ steps:
     downloadPath: '$(System.ArtifactsDirectory)'
     artifactName: 'drop'
 
-- task: SonarCloudAnalyze@1
 
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
