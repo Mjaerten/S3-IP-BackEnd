@@ -29,7 +29,7 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean verify sonar:sonar'
+    goals: 'clean verify sonar:sonar package'
     codeCoverageToolOption: JaCoCo
 
 - task: SonarCloudAnalyze@1
