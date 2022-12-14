@@ -31,7 +31,6 @@ steps:
     sonarQubeRunAnalysis: true
     sqMavenPluginVersionChoice: 'latest'
 
-- task: SonarCloudAnalyze@1
 
 - task: SonarCloudPublish@1
   inputs:
