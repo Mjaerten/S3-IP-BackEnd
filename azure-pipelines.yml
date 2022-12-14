@@ -26,10 +26,7 @@ steps:
     SonarCloud: 'SonarCloud'
     organization: 'epix-s3'
     scannerMode: 'Other'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner,
-      # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
+    extraProperties: 
       sonar.projectKey=Epix-S3_Epix
       sonar.projectName=Epix
 
@@ -52,7 +49,9 @@ steps:
     downloadPath: '$(System.ArtifactsDirectory)'
     artifactName: 'drop'
 
-- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
